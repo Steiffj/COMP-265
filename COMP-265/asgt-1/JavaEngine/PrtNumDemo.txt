@@ -1,0 +1,62 @@
+/
+/  Name: 
+/  File: prtNumDemo.txt
+/  Date: October 15, 2007
+/
+/  Desc: Demonstrates integer write subroutine
+/
+.const
+	a0	1234
+.end-const
+.main
+.var
+	a	0
+	link 	0
+.end-var
+main:	bipush '?'	/ display ?
+	out
+	bipush ' '	/ display space
+	out
+	jsr RdNum	/ read a	
+	istore a
+	bipush  10	/ new line
+	out
+	iload a	/ print a	
+	jsr PrtNum
+	bipush 10	/ newline
+	out
+	halt		
+/
+/   RdNum	- a subroutine "stub"
+/
+RdNum:	astore link
+		bipush 36
+		bipush '3'
+		out
+		bipush '6'
+		out
+		ret link
+/
+/   PrtNum Subroutine
+/
+prtNum:	astore link
+		bipush 0	/ push null
+		swap		/ bring n to top
+P0:	dup		
+	bipush 10	/ modulo 10
+	irem
+	bipush 48	/ 
+	iadd		/ convert to ASCII
+	swap		/ bring n to top  
+	bipush 10	/ divide by 10
+	idiv
+	dup		/ test for zero quotient
+	ifne P0
+	pop		/ throw out zero quotient	
+P1:	dup		/ output stack
+	ifeq P2
+	out
+	goto P1
+P2:	pop		/ pop null	
+	ret link	
+.end-main

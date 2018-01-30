@@ -1,0 +1,28 @@
+;
+;   Comp 265 - Assignment #1
+;   Jordan Steiff
+;   Due Feb 2, 2018
+;
+;   #1 Java Bytecode to compute ans = a b / b b * a b % +
+;
+
+.const
+    a 17
+    b 5
+.end-const
+.main
+.var
+    ans 0
+.end-var
+begin: ldc a
+    ldc b
+    idiv
+    ldc b
+    imul
+    ldc a
+    ldc b
+    irem
+    iadd
+    istore ans
+    halt
+.end-main

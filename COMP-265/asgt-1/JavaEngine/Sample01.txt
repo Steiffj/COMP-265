@@ -1,0 +1,30 @@
+;
+; 	A program to compute y = 2x^2+3x+5 for x = 7
+;
+.const			; constant pool
+	a	2
+	b	3
+	c	5
+	x0	7
+.end-const
+.main			; main method
+.var			; variable segment for main
+	x	0
+	y	0
+.end-var
+begin:	ldc x0		; push initial x value	
+	istore x	; pop to x 
+	iload x		; push x
+	dup		; duplicate top of stack
+	imul		; x^2	
+	ldc a		; push constant a
+	imul		; ax^2
+	iload x		; push x
+	ldc b		; push constant b
+	imul		; bx
+	ldc c		; push constant c 
+	iadd		; bx + c
+	iadd		; ax^2 + bx + c
+	istore y	; pop to y
+	halt
+.end-main

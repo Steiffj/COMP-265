@@ -1,0 +1,14 @@
+.const		// constant pool
+a	 2
+b	 3
+.end-const
+.main
+.var
+	sum	0 	// sum of 2 + 3
+.end-var
+start:	ldc	a
+	ldc	b
+	iadd
+	istore sum
+	halt
+.end-main

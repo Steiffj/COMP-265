@@ -1,0 +1,43 @@
+; Author: B. Shelburne	
+; File:   Sample05.txt
+; Date:   August 1, 2007
+;
+; Desc:  Calls a subroutine to read a character
+;        then outputs its ASCII successor
+;
+;
+.const	; constant pool area
+	one		1
+.end-const
+.main	; main method
+.var	; local variable frame
+	char  0
+	link  0		; holds return address	
+.end-var
+start:	bipush 63	; push ? on stack
+	out		;   and display 
+	bipush 32	; push blank on stack
+	out		;    and blank
+	jsr getch	; call getch – return char on stack	
+	dup		; duplicate top of stack
+	out        	; and display it	
+	istore char	; store char 
+	bipush 0x0a	; push new line character on stack
+	out		;    and display it
+	iload char	; load char
+	ldc one		; load 1
+	iadd        	; add 1 to character code
+	out		; display it
+	halt		; end of main code
+;
+;	subroutine
+;
+getch:	astore link	; store return address
+loop:	in		; get next input character & push on stack
+	dup		; duplicate top of stack
+	ifeq reread	; if top of stack == 0 skip 
+	goto done	; else go to done
+reread: pop		; pop stack
+	goto loop	; loop to get character
+done:	ret link
+.end-main
