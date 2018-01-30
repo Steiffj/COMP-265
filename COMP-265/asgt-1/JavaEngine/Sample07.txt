@@ -1,0 +1,22 @@
+;	
+;	Sample07.txt
+;
+.const
+	a	2	
+	b	3
+.end-const
+.main
+.var
+	x	0
+	y	0
+.end-var
+main:	ldc a	
+	ldc b
+	iadd		; x <- a + b
+	istore x
+	iload x
+	dup
+	imul		; y <- x * x
+	istore y
+	halt
+.end-main

@@ -1,0 +1,21 @@
+.const		// constant pool
+a	 2
+b	 3
+.end-const
+.main
+.var
+sum 0      // sum of 2 + 3
+.end-var
+start: ldc	a
+	 ldc	b
+	 iadd
+	 istore	sum
+	 iload 	sum	// get the sum
+	 bipush 48	// add 48
+	 iadd		//   to convert to ASCII	
+	 out		// and display it
+	 bipush 0x0a	// newline
+	 out
+	 halt
+.end-main
+

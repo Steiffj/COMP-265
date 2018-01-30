@@ -1,0 +1,21 @@
+;
+;   Chapter 4 - Exercise 5a
+;
+
+.const
+    offset 2
+    width 3
+    n 5
+.end-const
+.main
+.var
+    result 0
+.end-var
+begin: ldc offset
+    ldc width
+    ldc n
+    imul
+    iadd
+    istore result
+    halt
+.end-main

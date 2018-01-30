@@ -1,0 +1,62 @@
+; Author: B. Shelburne	
+; File:   Sample06.txt
+; Date:   August 6, 2007
+;
+; Desc:   Demonstrates (dynamic) arrays. Creates an integer 
+;         array of capacity 10, inserts the values 1, 2, 4 ... 512
+;         into the array then reads the array summing the values. 
+;        
+;
+.const
+	size 10		; array capacity
+.end-const
+.main
+.var
+	a 0		; holds address of array
+        index 0		; index for a
+	count 0		; loop counter
+	n 0
+	sum 0
+.end-var
+begin:	ldc size  
+	newarray int	; allocate int a[size]
+	astore a	; store address
+	bipush 0
+	istore index	; initialize index to 0
+	bipush 1	
+	istore n	; initialize n to 1
+	ldc size
+	istore count	; initialize loop counter to 10
+	goto end1
+loop1:	aload a		; push address of a
+	iload index	; push index
+	iload n		; push n
+	iastore		; a[index] <- n
+	iload n		; get n 
+	bipush 1
+	ishl		; double n
+	istore n	;   & store result
+	iinc index 1	; index++
+	iinc count -1	; decrement loop counter
+end1:	iload count	; loop control
+	ifgt loop1
+	bipush 0
+	istore index	; reset index to 0
+	bipush 0
+	istore sum	; initialize sum to 0
+	ldc size
+	istore count	; initialize loop counter to 10
+	goto end2
+loop2:	aload a		; push address of a
+	iload index	; push index
+	iaload		; a[index]
+	iload sum
+	iadd	
+	istore sum	; sum = sum + a[index]
+	iinc index 1	; index++
+	iinc count -1	; decrement loop counter
+end2:	iload count	; loop control
+	ifgt loop2
+	halt
+	goto begin
+.end-main	
